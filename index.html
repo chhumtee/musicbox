@@ -10,13 +10,17 @@
 
         <link rel="manifest" href="site.webmanifest">
         <link rel="apple-touch-icon" href="icon.png">
-        <!-- Place favicon.ico in the root directory -->
-		<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
 
-		<link href="https://fonts.googleapis.com/css?family=Oswald:400,500,600" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Oswald:400,500,600" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+		
+        <!-- Include Javascript files (jquery + main) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     </head>
     <body>
 
@@ -42,7 +46,7 @@
 					<section id="upcoming" class="halfsize">
 						<h1>Up next...</h1>
 
-						<p id="noQueue">There are no upcoming tracks! <i class="ion-android-sad"></i></p>
+						<p id="noQueue">There are no upcoming tracks!<br/> <i class="far fa-frown"></i></p>
 
 						<ul id="isQueued">
 
@@ -56,8 +60,7 @@
 						<form method="get" action="" id="search-term">
 							<div class="inputcontainer clearfix">
 								<input type="text" name="query" id="tb-query" class="left" placeholder="Search for a song..." />
-								<button type="submit" id="tb-submit" class="left">
-									<i class="ion-ios-search-strong"></i></button>
+								<button type="submit" id="tb-submit" class="left"><i class="fas fa-search"></i></button>
 							</div>
 						</form>
 
@@ -70,15 +73,11 @@
 			</div>
 		</div>
 
-		<!-- Include Javascript files (jquery + main) -->
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <!-- <script src="js/main.js"></script> -->
 
 		<script>
 
-		var nextVid = 'Atp-j69X96Q';
+        var nextVid = 'Atp-j69X96Q';
+        var apiKey = 'AIzaSyDaRIMgnLUalRn_XfmCChkq3CbX_WgPqSw';
 
 		$(document).ready(function () {
 
@@ -117,6 +116,7 @@
 
 		});
 
+
 		/* ==========================================================================
 		   CUSTOM YOUTUBE FUNCTIONS
 		   ========================================================================== */
@@ -128,14 +128,29 @@
 		    var params = {
 				maxResults: 20,
 		        part: 'snippet',
-		        key: 'AIzaSyAKzT-bTqbientCxKldplaqjeJXxll8S9U',
+		        key: apiKey,
 				type: 'video',
 		        q: searchTerm
-		    };
+            };
 
+			/*
 		    $.getJSON(url, params, function (searchTerm) {
 		        showResults(searchTerm);
-		    });
+		    }); */
+
+			$.ajax({
+				type: 'get',
+				dataType: "json",
+				url: url,
+				data: params,
+				success: function(searchTerm){
+					showResults(searchTerm);
+				},
+				error: function(xhr, status, error) {
+					console.log(JSON.stringify(xhr));
+				}
+			});
+
 		}
 
 		// Search and return the list of query
@@ -144,7 +159,7 @@
 		    var params = {
 				maxResults: 25,
 		        part: 'snippet',
-		        key: 'AIzaSyAKzT-bTqbientCxKldplaqjeJXxll8S9U',
+		        key: apiKey,
 				type: 'video',
 				relatedToVideoId: videoId,
 		    };
@@ -169,6 +184,7 @@
 
 		// Display the results
 		function showResults(results) {
+
 		    var html = "";
 		    var entries = results.items;
 
@@ -177,12 +193,12 @@
 		        var thumbnail = value.snippet.thumbnails.high.url;
 				var vidId = value.id.videoId;
 
-				html += '<li class="result">';
+				html += '<li class="icon result">';
 
 				html += '<div class="img-bg"><img src="' + thumbnail + '"></div>';
 				html += '<div class="vid-info"><p>' + title + '</p>';
-				html += '<a href="" class="add-queue btn-result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '"><i class="ion-plus"></i></a>';
-				html += '<a href="" class="play-now btn-result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '"><i class="ion-play"></i></a></div>';
+				html += '<a href="" class="add-queue btn-result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '"><i class="fas fa-plus"></i></a>';
+				html += '<a href="" class="play-now btn-result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '"><i class="fas fa-play"></i></a></div>';
 
 				html += '</li>';
 
@@ -195,12 +211,12 @@
 
 			let html = '';
 
-			html += '<li class="result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '">';
+			html += '<li class="icon result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '">';
 
 			html += '<div class="img-bg"><img src="' + thumbnail + '"></div>';
 			html += '<div class="vid-info"><p>' + title + '</p>';
-			html += '<a href="" class="remove btn-result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '"><i class="ion-close"></i></a>';
-			html += '<a href="" class="play-now btn-result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '"><i class="ion-play"></i></a></div>';
+			html += '<a href="" class="remove btn-result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '"><i class="fas fa-times"></i></a>';
+			html += '<a href="" class="play-now btn-result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '"><i class="fas fa-play"></i></a></div>';
 
 			html += '</li>';
 
@@ -259,7 +275,7 @@
 		function onPlayerStateChange(event) {
 			var tmp = $('#isQueued').children('li').first();
 
-			console.log(event.data);
+			// console.log(event.data);
 
 			if (event.data == 0) {
 

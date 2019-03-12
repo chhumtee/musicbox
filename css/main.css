@@ -217,7 +217,7 @@ h1 {
 .halfsize p i {
 	display: block;
 	font-size: 5em;
-	margin: -30px auto;
+	margin: 0 auto;
 }
 
 #upcoming {
@@ -332,6 +332,7 @@ h1 {
 	border: 2px solid #FFF;
 	border-radius: 50px;
 
+	text-decoration: none;
 	text-align: center;
 	color: #FFF;
 	margin-right: 1em;

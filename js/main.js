@@ -48,7 +48,7 @@ function getRequest(searchTerm) {
     var params = {
 		maxResults: 20,
         part: 'snippet',
-        key: 'AIzaSyDdtK4ebp4xCl_41vfPlFwutqAumqUo-uA',
+        key: 'AIzaSyAKzT-bTqbientCxKldplaqjeJXxll8S9U',
 		type: 'video',
         q: searchTerm
     };
@@ -64,7 +64,7 @@ function getRandomVideo(videoId) {
     var params = {
 		maxResults: 25,
         part: 'snippet',
-        key: 'AIzaSyDdtK4ebp4xCl_41vfPlFwutqAumqUo-uA',
+        key: 'AIzaSyAKzT-bTqbientCxKldplaqjeJXxll8S9U',
 		type: 'video',
 		relatedToVideoId: videoId,
     };
