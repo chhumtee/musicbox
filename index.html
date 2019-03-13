@@ -1,314 +1,83 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="manifest" href="site.webmanifest">
-        <link rel="apple-touch-icon" href="icon.png">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
+	<title>Music Box</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Oswald:400,500,600" rel="stylesheet">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link href="css/normalize.css" rel="stylesheet" />
+	<link href="css/main.css" rel="stylesheet" />
 
-		
-        <!-- Include Javascript files (jquery + main) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet">
 
-    </head>
-    <body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-		<div class="container flexcenter">
-			<div id="playing-bg">
-				<span id="curtain"></span>
+</head>
 
-				<h2 id="playing-title">Amen</h2>
+<body>
 
-				<img src="https://img.youtube.com/vi/Atp-j69X96Q/maxresdefault.jpg" id="img-bg" />
-			</div>
+	<div class="container">
 
-			<div id="musicbox-container">
+		<div class="list-queue">
+			<p class="queue-empty">There are no songs are in queue!</p>
 
-				<section id="current">
+			<ul class="list">
+				<!-- <li class="result flex-content">
+					<div class="list-info flex-content">
+						<p>Azee - Sexual Healing (prod. by Jovis) longer name testing long</p>
+						<a href="#" class="remove btn-result"><i class="fas fa-times"></i></a>
+						<a href="#" class="play-now btn-result"><i class="fas fa-play"></i></a>
+					</div>
+				</li> -->
+			</ul>
 
-					<iframe id="player" type="text/html" width="100%" height="315"
-  src="https://www.youtube.com/embed/Atp-j69X96Q?enablejsapi=1&showinfo=0&autoplay=1&mute=0"
-  frameborder="0" allow="autoplay"></iframe>
-				</section>
+		</div>
 
-				<div id="listing-container">
-					<section id="upcoming" class="halfsize">
-						<h1>Up next...</h1>
+		<div class="block">
+			<div class="player flex-content">
+				<img src="https://img.youtube.com/vi/dUq15VpUR6w/maxresdefault.jpg" class="player-img" />
 
-						<p id="noQueue">There are no upcoming tracks!<br/> <i class="far fa-frown"></i></p>
+				<div class="player-info">
 
-						<ul id="isQueued">
+					<h1 class="song-name">Azee - Sexual Healing (prod. by Jovis)</h1>
 
-						</ul>
+					<iframe id="player" type="text/html" width="100%" height="40" src="https://www.youtube.com/embed/dUq15VpUR6w?enablejsapi=1&autoplay=1&mute=0" frameborder="0" allow="autoplay"></iframe>
 
-					</section>
-
-					<!-- Search for videos -->
-					<section id="searchbox" class="halfsize">
-
-						<form method="get" action="" id="search-term">
-							<div class="inputcontainer clearfix">
-								<input type="text" name="query" id="tb-query" class="left" placeholder="Search for a song..." />
-								<button type="submit" id="tb-submit" class="left"><i class="fas fa-search"></i></button>
-							</div>
-						</form>
-
-						<div id="search-results"></div>
-
-					</section>
 				</div>
 
+			</div>
 
+
+			<div class="list-search">
+				<form method="get" action="" id="search-term">
+					<div class="searchbar">
+						<input type="text" name="search-music" value="" placeholder="Search for a song..." id="tb-query" class="input" />
+						<button type="submit" class="input"><i class="fas fa-search"></i></button>
+					</div>
+				</form>
+
+				<ul class="list">
+					<!-- <li class="result flex-content">
+						<img src="https://img.youtube.com/vi/dUq15VpUR6w/maxresdefault.jpg" class="list-img" />
+
+						<div class="list-info flex-content">
+							<p>Azee - Sexual Healing (prod. by Jovis)</p>
+							<a href="#" class="add-queue btn-result"><i class="fas fa-plus"></i></a>
+							<a href="#" class="play-now btn-result"><i class="fas fa-play"></i></a>
+						</div>
+					</li> -->
+				</ul>
 			</div>
 		</div>
 
+	</div>
 
-		<script>
+	<script src="js/main.js"></script>
 
-        var nextVid = 'Atp-j69X96Q';
-        var apiKey = 'AIzaSyDaRIMgnLUalRn_XfmCChkq3CbX_WgPqSw';
+</body>
 
-		$(document).ready(function () {
-
-			// Submit button
-			$('#search-term').submit(function (event) {
-				event.preventDefault();
-				var searchTerm = $('#tb-query').val();
-
-				// Search for query
-				getRequest(searchTerm);
-			});
-
-		});
-
-		// Determine function to call on click of a result
-		$(document).on('click', '.btn-result', function(e){
-			e.preventDefault();
-
-			let title = $(this).attr('data-title');
-			let thumbnail = $(this).attr('data-thumb');
-			let vidId = $(this).attr('data-id');
-			let resultType = $(this).attr('class');
-
-			if(resultType == 'add-queue btn-result') {
-				addToQueue(title, thumbnail, vidId);
-			}
-			else if(resultType == 'play-now btn-result') {
-				playNow(title, thumbnail, vidId);
-				if($(this).parent().parent().parent().attr('id') == 'isQueued') {
-					$(this).parent().parent().remove();
-				}
-			}
-			else if(resultType == 'remove btn-result') {
-				$(this).parent().parent().remove();
-			}
-
-		});
-
-
-		/* ==========================================================================
-		   CUSTOM YOUTUBE FUNCTIONS
-		   ========================================================================== */
-
-
-		// Search and return the list of query
-		function getRequest(searchTerm) {
-		    url = 'https://www.googleapis.com/youtube/v3/search';
-		    var params = {
-				maxResults: 20,
-		        part: 'snippet',
-		        key: apiKey,
-				type: 'video',
-		        q: searchTerm
-            };
-
-			/*
-		    $.getJSON(url, params, function (searchTerm) {
-		        showResults(searchTerm);
-		    }); */
-
-			$.ajax({
-				type: 'get',
-				dataType: "json",
-				url: url,
-				data: params,
-				success: function(searchTerm){
-					showResults(searchTerm);
-				},
-				error: function(xhr, status, error) {
-					console.log(JSON.stringify(xhr));
-				}
-			});
-
-		}
-
-		// Search and return the list of query
-		function getRandomVideo(videoId) {
-		    url = 'https://www.googleapis.com/youtube/v3/search';
-		    var params = {
-				maxResults: 25,
-		        part: 'snippet',
-		        key: apiKey,
-				type: 'video',
-				relatedToVideoId: videoId,
-		    };
-
-		    $.getJSON(url, params, function (videoId) {
-		        autoplayRelatedVideo(videoId);
-		    });
-		}
-
-		function autoplayRelatedVideo(results) {
-
-			var randomNumber = Math.floor(Math.random() * (25 - 0));
-			var entries = results.items[randomNumber];
-
-			var title = entries.snippet.title;
-			var thumbnail = entries.snippet.thumbnails.high.url;
-			var vidId = entries.id.videoId;
-
-			playNow(title, thumbnail, vidId);
-
-		}
-
-		// Display the results
-		function showResults(results) {
-
-		    var html = "";
-		    var entries = results.items;
-
-		    $.each(entries, function (index, value) {
-		        var title = value.snippet.title;
-		        var thumbnail = value.snippet.thumbnails.high.url;
-				var vidId = value.id.videoId;
-
-				html += '<li class="icon result">';
-
-				html += '<div class="img-bg"><img src="' + thumbnail + '"></div>';
-				html += '<div class="vid-info"><p>' + title + '</p>';
-				html += '<a href="" class="add-queue btn-result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '"><i class="fas fa-plus"></i></a>';
-				html += '<a href="" class="play-now btn-result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '"><i class="fas fa-play"></i></a></div>';
-
-				html += '</li>';
-
-		    });
-
-		    $('#search-results').html(html);
-		}
-
-		function addToQueue(title, thumbnail, vidId){
-
-			let html = '';
-
-			html += '<li class="icon result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '">';
-
-			html += '<div class="img-bg"><img src="' + thumbnail + '"></div>';
-			html += '<div class="vid-info"><p>' + title + '</p>';
-			html += '<a href="" class="remove btn-result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '"><i class="fas fa-times"></i></a>';
-			html += '<a href="" class="play-now btn-result" data-id="' + vidId + '" data-title="' + title +'" data-thumb="' + thumbnail + '"><i class="fas fa-play"></i></a></div>';
-
-			html += '</li>';
-
-			$('#noQueue').hide();
-			$('#isQueued').append(html).show();
-
-		}
-
-		function displayNext(title, thumbnail, vidId) {
-
-			let html = '';
-			let imgSrc = "https://img.youtube.com/vi/" + vidId + "/maxresdefault.jpg";
-
-			$('#img-bg').attr('src', imgSrc);
-			$('#playing-title').html(title);
-
-		}
-
-		/* ==========================================================================
-		   YOUTUBE IFRAME API FUNCTIONS
-		   ========================================================================== */
-
-		var tag = document.createElement('script');
-
-		tag.src = "https://www.youtube.com/iframe_api";
-		var firstScriptTag = document.getElementsByTagName('script')[0];
-		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-		var player;
-		function onYouTubeIframeAPIReady() {
-			player = new YT.Player('player', {
-			 height: '315',
-			 width: '100%',
-			 videoId: 'Atp-j69X96Q',
-			 events: {
-			   'onStateChange': onPlayerStateChange
-			 }
-			});
-		}
-
-		function playNow(title, thumbnail, vidId) {
-
-			let html = '';
-			let imgSrc = "https://img.youtube.com/vi/" + vidId + "/maxresdefault.jpg";
-
-			nextVid = vidId;
-
-			// $('iframe').attr('src', iframeSrc);
-			$('#img-bg').attr('src', imgSrc);
-			$('#playing-title').html(title);
-
-			player.loadVideoById({videoId: vidId});
-
-		}
-
-		function onPlayerStateChange(event) {
-			var tmp = $('#isQueued').children('li').first();
-
-			// console.log(event.data);
-
-			if (event.data == 0) {
-
-				if($('#isQueued').children('li').length == 0) {
-
-					getRandomVideo(nextVid);
-
-					$('#noQueue').show();
-					$('#isQueued').hide();
-				}
-				else {
-					let title = tmp.find('.btn-result').attr('data-title');
-					let thumbnail = tmp.find('btn-result').attr('data-thumb');
-					nextVid = tmp.find('.btn-result').attr('data-id');
-
-					player.loadVideoById({videoId: nextVid});
-					displayNext(title, thumbnail, nextVid);
-
-					tmp.remove();
-
-					if($('#isQueued').children('li').length == 0) {
-						$('#noQueue').show();
-						$('#isQueued').hide();
-					}
-
-					playNow(title, thumbnail, nextVid);
-				}
-
-				console.log(nextVid);
-			}
-		}
-
-
-		</script>
-    </body>
 </html>
