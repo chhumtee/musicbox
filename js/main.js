@@ -25,12 +25,23 @@ $(document).on('click', '.btn-result', function(e){
     }
     else if(resultType == 'play-now btn-result') {
         playNow(title, thumbnail, vidId);
-        if($(this).parent().parent().parent().attr('id') == 'isQueued') {
-            $(this).parent().parent().remove();
+        $(this).parent().parent().remove();
+
+
+        if($('.list-queue .list').children('li').length == 0) {
+            $('.queue-empty').show();
+            $('.list-queue .list').hide();
         }
+
     }
     else if(resultType == 'remove btn-result') {
         $(this).parent().parent().remove();
+
+        
+        if($('.list-queue .list').children('li').length == 0) {
+            $('.queue-empty').show();
+            $('.list-queue .list').hide();
+        }
     }
 
 });
