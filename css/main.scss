@@ -78,10 +78,16 @@ iframe {
         border-bottom: $border;
         justify-content: space-between;
         padding: 1rem 1.25rem 1rem 3.125rem;
+        transition: background 0.3s ease;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.15);
+        }
 
         &:last-child {
             border-bottom: none;
         }
+
 
         .list-img {
             display: block;

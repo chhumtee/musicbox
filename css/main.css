@@ -83,6 +83,12 @@ iframe {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 1rem 1.25rem 1rem 3.125rem;
+  -webkit-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+
+.list .result:hover {
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .list .result:last-child {
