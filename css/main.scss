@@ -116,7 +116,7 @@ iframe {
 .list-queue {
     position: relative;
     border-right: $border;
-    max-width: 500px;
+    max-width: 400px;
     width: 100%;
 
     .queue-empty {
@@ -168,7 +168,7 @@ iframe {
     }
 
     .list {
-        height: calc(100% - 400px);
+        height: calc(100% - 350px);
         overflow-y: auto;
     }
 
@@ -204,8 +204,8 @@ iframe {
     .player-img {
         box-shadow: $shadow;
         display: block;
-        height: 250px;
-        width: 250px;
+        height: 200px;
+        width: 200px;
         object-fit: cover;
     }
 

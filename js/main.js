@@ -60,7 +60,7 @@ function getRequest(searchTerm) {
         part: 'snippet',
         key: apiKey,
         type: 'video',
-        q: searchTerm + " song"
+        q: searchTerm + " music"
     };
 
     /*
@@ -91,7 +91,7 @@ function showResults(results) {
 
     $.each(entries, function (index, value) {
         var title = value.snippet.title;
-        var thumbnail = value.snippet.thumbnails.high.url;
+        var thumbnail = value.snippet.thumbnails.medium.url;
         var vidId = value.id.videoId;
 
         html += '<li class="result flex-content">';
@@ -158,7 +158,7 @@ function autoplayRelatedVideo(results) {
     var entries = results.items[randomNumber];
 
     var title = entries.snippet.title;
-    var thumbnail = entries.snippet.thumbnails.high.url;
+    var thumbnail = entries.snippet.thumbnails.medium.url;
     var vidId = entries.id.videoId;
 
     playNow(title, thumbnail, vidId);
@@ -190,7 +190,8 @@ function onYouTubeIframeAPIReady() {
 function playNow(title, thumbnail, vidId) {
 
     let html = '';
-    let imgSrc = "https://img.youtube.com/vi/" + vidId + "/maxresdefault.jpg";
+    //let imgSrc = "https://img.youtube.com/vi/" + vidId + "/maxresdefault.jpg";
+    let imgSrc = thumbnail;
 
     nextVid = vidId;
 
